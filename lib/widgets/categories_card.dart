@@ -9,7 +9,7 @@ class CategoriesCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        margin: const EdgeInsets.only(top: 18, left: 8, right: 8),
+        margin: const EdgeInsets.only(top: 18, left: 5, right: 5),
         width: 130,
         height: 60,
         decoration: BoxDecoration(
@@ -25,7 +25,7 @@ class CategoriesCard extends StatelessWidget {
           ),
           borderRadius: const BorderRadius.all(
             Radius.circular(
-              5,
+              15,
             ),
           ),
           color: Colors.white,

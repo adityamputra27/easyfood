@@ -10,14 +10,14 @@ class PopularMenusCard extends StatelessWidget {
       onTap: () {},
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(15),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.25),
               spreadRadius: 0.5,
               blurRadius: 1,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3),
             ),
           ],
         ),
@@ -28,7 +28,7 @@ class PopularMenusCard extends StatelessWidget {
               width: 175,
               height: 130,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(15),
                 image: const DecorationImage(
                   image: AssetImage(
                     'assets/food.jpg',

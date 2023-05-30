@@ -1,3 +1,4 @@
+import 'package:easyfood/items/bottom_navigation_item.dart';
 import 'package:easyfood/widgets/categories_card.dart';
 import 'package:easyfood/widgets/popular_menus_card.dart';
 import 'package:flutter/material.dart';
@@ -101,7 +102,7 @@ class HomePage extends StatelessWidget {
             Text(
               'Categories',
               style: GoogleFonts.sourceSansPro(
-                fontSize: 18,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: const Color(0xff09051C),
               ),
@@ -128,7 +129,7 @@ class HomePage extends StatelessWidget {
           top: 30,
           left: 25,
           right: 25,
-          bottom: 50,
+          bottom: 90,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,7 +137,7 @@ class HomePage extends StatelessWidget {
             Text(
               'Popular Menu',
               style: GoogleFonts.sourceSansPro(
-                fontSize: 18,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: const Color(0xff09051C),
               ),
@@ -158,6 +159,47 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ],
+        ),
+      );
+    }
+
+    Widget bottomNavigation() {
+      return Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          width: double.infinity,
+          height: 70,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.25),
+                spreadRadius: 0.5,
+                blurRadius: 1,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          margin: const EdgeInsets.only(
+            bottom: 15,
+            left: 25,
+            right: 25,
+          ),
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              BottomNavigationItem(
+                imageUrl: 'assets/icon_home.png',
+              ),
+              BottomNavigationItem(
+                imageUrl: 'assets/icon_cart.png',
+              ),
+              BottomNavigationItem(
+                imageUrl: 'assets/icon_user.png',
+              ),
+            ],
+          ),
         ),
       );
     }
@@ -184,6 +226,7 @@ class HomePage extends StatelessWidget {
               menus(),
             ],
           ),
+          bottomNavigation(),
         ],
       ),
     );
