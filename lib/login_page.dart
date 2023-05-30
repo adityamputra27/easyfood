@@ -7,7 +7,6 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Stack(
         children: [
@@ -22,10 +21,12 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-          Center(
+          SingleChildScrollView(
             child: Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 24,
+              margin: const EdgeInsets.only(
+                left: 25,
+                right: 25,
+                top: 75,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -101,7 +102,9 @@ class LoginPage extends StatelessWidget {
                               15,
                             ),
                           )),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/home');
+                      },
                       child: Text(
                         'Login',
                         style: GoogleFonts.sourceSansPro(
