@@ -64,38 +64,10 @@ class LoginPage extends StatelessWidget {
                   ),
                   TextFormField(
                     decoration: InputDecoration(
-                      hintText: 'Email',
+                      hintText: 'Phone Number',
                       hintStyle: GoogleFonts.sourceSansPro(
                         fontSize: 14,
-                        color: Color.fromARGB(255, 183, 183, 183),
-                        letterSpacing: 0.25,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(
-                          color: Color(0xffF4F4F4),
-                          width: 1,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(
-                          color: Color(0xffF4F4F4),
-                          width: 1,
-                        ),
-                      ),
-                      contentPadding: const EdgeInsets.all(24),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      hintStyle: GoogleFonts.sourceSansPro(
-                        fontSize: 14,
-                        color: Color.fromARGB(255, 183, 183, 183),
+                        color: const Color.fromARGB(255, 183, 183, 183),
                         letterSpacing: 0.25,
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -144,7 +116,7 @@ class LoginPage extends StatelessWidget {
                     height: 30,
                   ),
                   Text(
-                    'Forgot Your Password?',
+                    'Dont have an account?',
                     style: GoogleFonts.sourceSansPro(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
