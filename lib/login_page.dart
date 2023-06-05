@@ -1,8 +1,100 @@
+import 'package:easyfood/url.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController phone = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  String url = URL().getURL();
+
+  login() async {
+    try {
+      var response = await http.post(
+        Uri.parse("$url/auth/login"),
+        body: {
+          "phone": phone.text.toString(),
+          "password": password.text.toString(),
+        },
+      );
+      var result = json.decode(response.body);
+
+      if (result['status'] == false) {
+        _showMyDialog(result['message'], 'Mengerti', () {
+          Navigator.pop(context);
+        });
+      } else {
+        bool isLoggedIn = result['data']['is_logged_in'];
+        String id = result['data']['id'];
+        String fullname = result['data']['fullname'];
+        String phone = result['data']['phone'];
+        String address = result['data']['address'] ?? '';
+
+        savePreference(isLoggedIn, id, fullname, phone, address);
+
+        _showMyDialog(result['message'], 'OK', () {
+          Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  savePreference(bool login, String id, String fullname, String phone,
+      String address) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      preferences.setBool("is_logged_in", login);
+      preferences.setString("id", id);
+      preferences.setString("fullname", fullname);
+      preferences.setString("phone", phone);
+      preferences.setString("address", address);
+    });
+  }
+
+  Future<void> _showMyDialog(
+      String text, String subtext, Function() onPressed) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            text.toString(),
+            style: GoogleFonts.sourceSansPro(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: onPressed,
+              child: Text(
+                subtext.toString(),
+                style: GoogleFonts.sourceSansPro(
+                  fontWeight: FontWeight.w700,
+                  color: const Color(
+                    0xff15BE77,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +156,7 @@ class LoginPage extends StatelessWidget {
                     height: 40,
                   ),
                   TextFormField(
+                    controller: phone,
                     decoration: InputDecoration(
                       hintText: 'Phone Number',
                       hintStyle: GoogleFonts.sourceSansPro(
@@ -92,6 +185,8 @@ class LoginPage extends StatelessWidget {
                     height: 20,
                   ),
                   TextFormField(
+                    controller: password,
+                    obscureText: true,
                     decoration: InputDecoration(
                       hintText: 'Password',
                       hintStyle: GoogleFonts.sourceSansPro(
@@ -131,7 +226,7 @@ class LoginPage extends StatelessWidget {
                             ),
                           )),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/home');
+                        login();
                       },
                       child: Text(
                         'Login',

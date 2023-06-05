@@ -50,7 +50,7 @@ class _SplashPageState extends State<SplashPage> {
                   ),
                 ),
                 Text(
-                  'Book Your Favorite Food',
+                  'Order Your Favorite Food',
                   style: GoogleFonts.inter(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,

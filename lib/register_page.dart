@@ -15,7 +15,6 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController fullname = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController password = TextEditingController();
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   String url = URL().getURL();
 

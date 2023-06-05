@@ -1,8 +1,13 @@
+import 'package:easyfood/models/categories_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CategoriesCard extends StatelessWidget {
-  const CategoriesCard({super.key});
+  final CategoriesModel category;
+  const CategoriesCard(
+    this.category, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +37,7 @@ class CategoriesCard extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            'Cake',
+            category.name,
             style: GoogleFonts.sourceSansPro(
               fontSize: 18,
               fontWeight: FontWeight.bold,
