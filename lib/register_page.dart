@@ -1,8 +1,83 @@
+import 'package:easyfood/url.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:get/get.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  TextEditingController fullname = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController password = TextEditingController();
+  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+  String url = URL().getURL();
+
+  register() async {
+    try {
+      var response = await http.post(
+        Uri.parse("$url/auth/register"),
+        body: {
+          "fullname": fullname.text.toString(),
+          "phone": phone.text.toString(),
+          "password": password.text.toString(),
+        },
+      );
+      var result = json.decode(response.body);
+
+      if (result['status'] == false) {
+        _showMyDialog(result['message'], 'Mengerti', () {
+          Navigator.pop(context);
+        });
+      } else {
+        _showMyDialog(result['message'], 'OK', () {
+          Navigator.pushNamed(context, '/login');
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> _showMyDialog(
+      String text, String subtext, Function() onPressed) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            text.toString(),
+            style: GoogleFonts.sourceSansPro(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: onPressed,
+              child: Text(
+                subtext.toString(),
+                style: GoogleFonts.sourceSansPro(
+                  fontWeight: FontWeight.w700,
+                  color: const Color(
+                    0xff15BE77,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +139,7 @@ class RegisterPage extends StatelessWidget {
                     height: 40,
                   ),
                   TextFormField(
+                    controller: fullname,
                     decoration: InputDecoration(
                       hintText: 'Your Name',
                       hintStyle: GoogleFonts.sourceSansPro(
@@ -92,6 +168,7 @@ class RegisterPage extends StatelessWidget {
                     height: 20,
                   ),
                   TextFormField(
+                    controller: phone,
                     decoration: InputDecoration(
                       hintText: 'Phone Number',
                       hintStyle: GoogleFonts.sourceSansPro(
@@ -120,6 +197,8 @@ class RegisterPage extends StatelessWidget {
                     height: 20,
                   ),
                   TextFormField(
+                    controller: password,
+                    obscureText: true,
                     decoration: InputDecoration(
                       hintText: 'Password',
                       hintStyle: GoogleFonts.sourceSansPro(
@@ -152,14 +231,15 @@ class RegisterPage extends StatelessWidget {
                     height: 57,
                     child: TextButton(
                       style: TextButton.styleFrom(
-                          backgroundColor: const Color(0xff15BE77),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              15,
-                            ),
-                          )),
+                        backgroundColor: const Color(0xff15BE77),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                            15,
+                          ),
+                        ),
+                      ),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/home');
+                        register();
                       },
                       child: Text(
                         'Register',
