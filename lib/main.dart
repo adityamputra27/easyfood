@@ -1,5 +1,6 @@
 import 'package:easyfood/home_page.dart';
 import 'package:easyfood/login_page.dart';
+import 'package:easyfood/register_page.dart';
 import 'package:easyfood/splash_page.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const SplashPage(),
         '/login': (context) => const LoginPage(),
+        '/register': (context) => const RegisterPage(),
         '/home': (context) => const HomePage(),
       },
     );

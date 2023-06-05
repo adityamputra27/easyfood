@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class LoginPage extends StatelessWidget {
                     height: 50,
                   ),
                   Text(
-                    'Login To Your Account',
+                    'Create Your Account',
                     style: GoogleFonts.sourceSansPro(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -62,6 +62,34 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(
                     height: 40,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: 'Your Name',
+                      hintStyle: GoogleFonts.sourceSansPro(
+                        fontSize: 14,
+                        color: const Color.fromARGB(255, 183, 183, 183),
+                        letterSpacing: 0.25,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(
+                          color: Color(0xffF4F4F4),
+                          width: 1,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(
+                          color: Color(0xffF4F4F4),
+                          width: 1,
+                        ),
+                      ),
+                      contentPadding: const EdgeInsets.all(24),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
                   ),
                   TextFormField(
                     decoration: InputDecoration(
@@ -134,7 +162,7 @@ class LoginPage extends StatelessWidget {
                         Navigator.pushNamed(context, '/home');
                       },
                       child: Text(
-                        'Login',
+                        'Register',
                         style: GoogleFonts.sourceSansPro(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -148,10 +176,10 @@ class LoginPage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/register');
+                      Navigator.pushNamed(context, '/login');
                     },
                     child: Text(
-                      'Dont have an account?',
+                      'Already have an account?',
                       style: GoogleFonts.sourceSansPro(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
