@@ -1,15 +1,11 @@
-import 'dart:convert';
-
 import 'package:easyfood/cubit/categories_cubit.dart';
 import 'package:easyfood/models/categories_model.dart';
-import 'package:easyfood/url.dart';
 import 'package:easyfood/widgets/categories_card.dart';
 import 'package:easyfood/widgets/popular_menus_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
