@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -48,6 +49,26 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ],
+              ),
+            ),
+            const badges.Badge(
+              badgeContent: SizedBox(
+                width: 15,
+                height: 15,
+                child: Center(
+                  child: Text(
+                    "5",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              child: Icon(
+                Icons.shopping_cart,
+                size: 40,
+                color: Color.fromARGB(255, 47, 182, 99),
               ),
             ),
           ],
