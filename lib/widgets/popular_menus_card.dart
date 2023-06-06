@@ -1,8 +1,11 @@
+import 'package:easyfood/models/foods_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class PopularMenusCard extends StatelessWidget {
-  const PopularMenusCard({super.key});
+  final FoodsModel food;
+  const PopularMenusCard(this.food, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +32,9 @@ class PopularMenusCard extends StatelessWidget {
               height: 130,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                image: const DecorationImage(
-                  image: AssetImage(
-                    'assets/food.jpg',
+                image: DecorationImage(
+                  image: NetworkImage(
+                    food.image,
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -48,7 +51,7 @@ class PopularMenusCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Palm Beach Seafood',
+                    food.name,
                     style: GoogleFonts.sourceSansPro(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
@@ -56,12 +59,19 @@ class PopularMenusCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Rp. 15.000',
+                    NumberFormat.currency(
+                      locale: 'id',
+                      symbol: 'Rp. ',
+                      decimalDigits: 0,
+                    ).format(
+                      double.parse(food.price),
+                    ),
                     style: GoogleFonts.sourceSansPro(
                       fontSize: 14,
                       fontWeight: FontWeight.normal,
                       color: const Color(0xff3B3B3B),
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),

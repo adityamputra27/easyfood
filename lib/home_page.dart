@@ -1,5 +1,7 @@
 import 'package:easyfood/cubit/categories_cubit.dart';
+import 'package:easyfood/cubit/foods_cubit.dart';
 import 'package:easyfood/models/categories_model.dart';
+import 'package:easyfood/models/foods_model.dart';
 import 'package:easyfood/widgets/categories_card.dart';
 import 'package:easyfood/widgets/popular_menus_card.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
+    context.read<FoodsCubit>().fetchFoods();
     context.read<CategoriesCubit>().fetchCategories();
     super.initState();
   }
@@ -161,42 +164,63 @@ class _HomePageState extends State<HomePage> {
     }
 
     Widget menus() {
-      return Container(
-        margin: const EdgeInsets.only(
-          top: 30,
-          left: 25,
-          right: 25,
-          bottom: 90,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Popular Menu',
-              style: GoogleFonts.sourceSansPro(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xff09051C),
+      return BlocConsumer<FoodsCubit, FoodsState>(
+        listener: (context, state) {
+          if (state is FoodsFailed) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Colors.redAccent,
+                content: Text(state.error),
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is FoodsSuccess) {
+            return Container(
+              margin: const EdgeInsets.only(
+                top: 30,
+                left: 25,
+                right: 25,
+                bottom: 90,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Popular Menu',
+                    style: GoogleFonts.sourceSansPro(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xff09051C),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  StaggeredGrid.count(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    children: state.foods.map((FoodsModel food) {
+                      return PopularMenusCard(food);
+                    }).toList(),
+                  ),
+                ],
+              ),
+            );
+          }
+          return Center(
+            child: Container(
+              margin: const EdgeInsets.only(
+                top: 30,
+              ),
+              child: const CircularProgressIndicator(
+                color: Color.fromARGB(255, 47, 182, 99),
               ),
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            StaggeredGrid.count(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              children: const [
-                PopularMenusCard(),
-                PopularMenusCard(),
-                PopularMenusCard(),
-                PopularMenusCard(),
-                PopularMenusCard(),
-                PopularMenusCard(),
-              ],
-            ),
-          ],
-        ),
+          );
+        },
       );
     }
 
