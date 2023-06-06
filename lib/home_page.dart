@@ -1,7 +1,9 @@
+import 'package:easyfood/cubit/carts_cubit.dart';
 import 'package:easyfood/cubit/categories_cubit.dart';
 import 'package:easyfood/cubit/foods_cubit.dart';
 import 'package:easyfood/models/categories_model.dart';
 import 'package:easyfood/models/foods_model.dart';
+import 'package:easyfood/user_page.dart';
 import 'package:easyfood/widgets/categories_card.dart';
 import 'package:easyfood/widgets/popular_menus_card.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     context.read<FoodsCubit>().fetchFoods();
     context.read<CategoriesCubit>().fetchCategories();
+    context.read<CartsCubit>().fetchCountCarts();
     super.initState();
   }
 
@@ -51,24 +54,49 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            const badges.Badge(
-              badgeContent: SizedBox(
-                width: 15,
-                height: 15,
-                child: Center(
-                  child: Text(
-                    "5",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const UserPage()),
+                );
+              },
+              child: badges.Badge(
+                badgeContent: SizedBox(
+                  width: 15,
+                  height: 15,
+                  child: BlocConsumer<CartsCubit, CartsState>(
+                    listener: (context, state) {
+                      if (state is CartsFailed) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.redAccent,
+                            content: Text(state.error),
+                          ),
+                        );
+                      }
+                    },
+                    builder: (context, state) {
+                      if (state is CartsSuccess) {
+                        return Center(
+                          child: Text(
+                            state.carts.total,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        );
+                      }
+                      return const CircularProgressIndicator();
+                    },
                   ),
                 ),
-              ),
-              child: Icon(
-                Icons.shopping_cart,
-                size: 40,
-                color: Color.fromARGB(255, 47, 182, 99),
+                child: const Icon(
+                  Icons.shopping_cart,
+                  size: 40,
+                  color: Color.fromARGB(255, 47, 182, 99),
+                ),
               ),
             ),
           ],
