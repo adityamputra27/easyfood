@@ -1,3 +1,4 @@
+import 'package:easyfood/detail_menu.dart';
 import 'package:easyfood/models/foods_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,7 +11,12 @@ class PopularMenusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DetailMenu(food)),
+        );
+      },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
