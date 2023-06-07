@@ -115,7 +115,7 @@ class _CartPageState extends State<CartPage> {
     Widget carts() {
       return Container(
         margin: const EdgeInsets.only(
-          top: 50,
+          top: 65,
           left: 25,
           right: 25,
           bottom: 20,
