@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:easyfood/models/cart_customers_model.dart';
 import 'package:easyfood/models/carts_model.dart';
 import 'package:easyfood/services/carts_service.dart';
 import 'package:equatable/equatable.dart';

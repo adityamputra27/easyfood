@@ -1,3 +1,5 @@
+import 'package:easyfood/cart_page.dart';
+import 'package:easyfood/cubit/cart_customers_cubit.dart';
 import 'package:easyfood/cubit/carts_cubit.dart';
 import 'package:easyfood/cubit/categories_cubit.dart';
 import 'package:easyfood/cubit/foods_cubit.dart';
@@ -32,6 +34,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => CartsCubit(),
         ),
+        BlocProvider(
+          create: (context) => CartCustomersCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -40,6 +45,7 @@ class MyApp extends StatelessWidget {
           '/login': (context) => const LoginPage(),
           '/register': (context) => const RegisterPage(),
           '/home': (context) => const MainPage(),
+          '/carts': (context) => const CartPage(),
         },
       ),
     );

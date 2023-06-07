@@ -67,14 +67,7 @@ class _HomePageState extends State<HomePage> {
                   height: 15,
                   child: BlocConsumer<CartsCubit, CartsState>(
                     listener: (context, state) {
-                      if (state is CartsFailed) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: Colors.redAccent,
-                            content: Text(state.error),
-                          ),
-                        );
-                      }
+                      if (state is CartsFailed) {}
                     },
                     builder: (context, state) {
                       if (state is CartsSuccess) {
@@ -88,7 +81,15 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       }
-                      return const CircularProgressIndicator();
+                      return const Center(
+                        child: Text(
+                          "0",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      );
                     },
                   ),
                 ),
