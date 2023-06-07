@@ -1,3 +1,4 @@
+import 'package:easyfood/cart_page.dart';
 import 'package:easyfood/cubit/page_cubit.dart';
 import 'package:easyfood/home_page.dart';
 import 'package:easyfood/items/bottom_navigation_item.dart';
@@ -15,7 +16,7 @@ class MainPage extends StatelessWidget {
         case 0:
           return const HomePage();
         case 1:
-          return const HomePage();
+          return const CartPage();
         case 2:
           return const UserPage();
         default:

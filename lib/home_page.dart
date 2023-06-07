@@ -1,3 +1,4 @@
+import 'package:easyfood/cart_page.dart';
 import 'package:easyfood/cubit/carts_cubit.dart';
 import 'package:easyfood/cubit/categories_cubit.dart';
 import 'package:easyfood/cubit/foods_cubit.dart';
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const UserPage()),
+                  MaterialPageRoute(builder: (context) => const CartPage()),
                 );
               },
               child: badges.Badge(
