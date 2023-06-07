@@ -7,6 +7,7 @@ class CartCustomersModel extends Equatable {
   final String quantity;
   final String foodName;
   final String foodImage;
+  final String foodPrice;
 
   const CartCustomersModel({
     required this.id,
@@ -15,6 +16,7 @@ class CartCustomersModel extends Equatable {
     required this.quantity,
     required this.foodName,
     required this.foodImage,
+    required this.foodPrice,
   });
 
   factory CartCustomersModel.fromJson(Map<String, dynamic> json) {
@@ -25,10 +27,21 @@ class CartCustomersModel extends Equatable {
       quantity: json['quantity'],
       foodName: json['food_name'],
       foodImage: json['food_image'],
+      foodPrice: json['food_price'],
     );
   }
 
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'foods_id': foodsId,
+        'customers_id': customersId,
+        'quantity': quantity,
+        'food_name': foodName,
+        'food_image': foodImage,
+        'food_price': foodPrice,
+      };
+
   @override
   List<Object?> get props =>
-      [id, foodsId, customersId, quantity, foodName, foodImage];
+      [id, foodsId, customersId, quantity, foodName, foodImage, foodPrice];
 }

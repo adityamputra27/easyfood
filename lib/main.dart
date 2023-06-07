@@ -4,6 +4,7 @@ import 'package:easyfood/cubit/carts_cubit.dart';
 import 'package:easyfood/cubit/categories_cubit.dart';
 import 'package:easyfood/cubit/foods_cubit.dart';
 import 'package:easyfood/cubit/page_cubit.dart';
+import 'package:easyfood/cubit/tables_cubit.dart';
 import 'package:easyfood/main_page.dart';
 import 'package:easyfood/login_page.dart';
 import 'package:easyfood/register_page.dart';
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CategoriesCubit(),
+        ),
+        BlocProvider(
+          create: (context) => TablesCubit(),
         ),
         BlocProvider(
           create: (context) => CartsCubit(),
