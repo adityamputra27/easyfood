@@ -1,16 +1,9 @@
 import 'package:easyfood/cubit/carts_cubit.dart';
 import 'package:easyfood/cubit/categories_cubit.dart';
 import 'package:easyfood/cubit/foods_cubit.dart';
-import 'package:easyfood/models/categories_model.dart';
-import 'package:easyfood/models/foods_model.dart';
-import 'package:easyfood/user_page.dart';
-import 'package:easyfood/widgets/categories_card.dart';
-import 'package:easyfood/widgets/popular_menus_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:badges/badges.dart' as badges;
 import 'package:intl/intl.dart';
 
 class CartPage extends StatefulWidget {

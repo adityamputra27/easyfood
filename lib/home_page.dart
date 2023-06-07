@@ -4,7 +4,6 @@ import 'package:easyfood/cubit/categories_cubit.dart';
 import 'package:easyfood/cubit/foods_cubit.dart';
 import 'package:easyfood/models/categories_model.dart';
 import 'package:easyfood/models/foods_model.dart';
-import 'package:easyfood/user_page.dart';
 import 'package:easyfood/widgets/categories_card.dart';
 import 'package:easyfood/widgets/popular_menus_card.dart';
 import 'package:flutter/material.dart';
